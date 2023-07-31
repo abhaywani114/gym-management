@@ -1,0 +1,93 @@
+.form {
+  flex: 1.5;
+  padding: 30px;
+  z-index:900;
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    margin: 25px auto;
+    .radio {
+     display: flex;
+     align-items: center;
+     justify-content: flex-start;
+     flex-direction: row;
+     gap: 15px;
+     flex-direction: row;
+      label {
+        margin-bottom: 0;
+      }
+      input, select {
+        flex-grow: 1;
+      }
+    }
+
+    label {
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    input, textarea, select {
+      transition: 0.1s;
+      background: #fff;
+      border: unset;
+      font-size: 14px;
+      height: 40px;
+      border: unset;
+      padding: 1px 10px;
+
+      &:active, &:focus, &:valid {
+        outline: none;
+        border-bottom: 3px solid $primary_color;
+      }
+
+      &:invalid {
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+      }
+    }
+  }
+
+  .button-wrapper {
+    transition: 0.3s;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+
+    .button {
+      all: unset;
+      transition: 0.3s;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 32px;
+      gap: 10px;
+      background: $primary_color;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      flex-grow: 1;
+      flex-shrink: 0;
+      &.selected {
+        background: $secondary_color;
+      }
+      &:hover {
+        background: $secondary_color;
+      }
+      &.google {
+        font-weight: 700;
+        background: rgba(0,0,0,0.5);
+        &:hover {
+          background: rgba(0,0,0,0.8);
+        }
+      }
+    }
+ }
+}
+
+.alert {
+  color: rgba(229, 1, 1, 0.8);
+  font-weight: 600;
+}

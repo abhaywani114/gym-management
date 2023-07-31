@@ -38,16 +38,23 @@
         <span>Howdy doing?</span>
     @endguest
     @auth
-        <span>@yeild('title')</span>
+        <span>@yield('title')</span>
     @endauth
   </div>
   <div class="link-list">
-    @guest
      <ul>
+    @auth
+      <li><a class="{{request()->route()->getName() == 'user.login' ? 'active':''}}" href="{{route('user.login')}}">Web Feed</a></li>
+      <li><a class="{{request()->route()->getName() == 'profile.profile' ? 'active':''}}" href="{{route('profile.profile', Auth::user()->id)}}">Profile</a></li>
+      <li><a class="{{request()->route()->getName() == 'user.login' ? 'active':''}}" href="{{route('user.login')}}">Today</a></li>
+      <li><a class="{{request()->route()->getName() == 'user.login' ? 'active':''}}" href="{{route('user.login')}}">My Diet</a></li>
+      <li><a class="{{request()->route()->getName() == 'profile.settings' ? 'active':''}}" href="{{route('profile.settings', Auth::user()->id)}}">Settings</a></li>
+    @endauth
+    @guest
       <li><a class="{{request()->route()->getName() == 'user.login' ? 'active':''}}" href="{{route('user.login')}}">Login</a></li>
       <li><a class="{{request()->route()->getName() == 'user.signup' ? 'active':''}}" href="{{route('user.signup')}}">Signup</a></li>
-    </ul>
     @endguest
+    </ul>
   </div>
 <div class="social-media">
             <div class="facebook">

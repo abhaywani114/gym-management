@@ -121,6 +121,7 @@
     justify-content: space-between;
     box-shadow: rgb(178 178 178 / 32%) 1px -3px 7px 6px;
     padding: 0px 40px;
+    z-index: 1000;
     .link-list {
         ul {
             display: flex;

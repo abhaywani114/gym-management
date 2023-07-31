@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +15,16 @@ use App\Http\Controllers\GoogleController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware('auth')->get('/', function () {
+    return view('web_feed');
 })->name('homepage');
 
-
+Route::name('profile.')->prefix('/{username}')->middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, "profile"])->name('profile');
+    Route::get('/details', [ProfileController::class, "details"])->name('details');
+    Route::get('/calendar', [ProfileController::class, "calendar"])->name('calendar');
+    Route::get('/settings', [ProfileController::class, "settings"])->name('settings');
+});
 //########################################
 //User Management Routes
 Route::get('usermanagement/login', [UserManagementController::class, "login"])->

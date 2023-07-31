@@ -16,7 +16,10 @@
       <header>
         @include('components.navbar')
       </header>
-        @yield('content')
+
+        <main class="main-content-wrapper">
+            @yield('content')
+        </main>
         @include('components.footer')
         <script src="{{asset('/js/jquery-3.6.1.min.js')}}"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>

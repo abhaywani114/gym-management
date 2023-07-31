@@ -29,48 +29,47 @@ class UserManagementController extends Controller
 		}
 	}
 
-	
+
 	function signupHanlde(Request $request) {
 		try {
 			$validator = Validator::make($request->all(),[
-				"first_name"		=>	"required|min:2",
-				"last_name"		=>	"required|min:1",
-				"email"		=>	"required|email:rfc|unique:users,email",
-				"password"	=>	"required|confirmed",
+				"first_name"    =>	"required|min:2",
+				"last_name" 	=>	"required|min:1",
+				"email"		    =>	"required|email:rfc|unique:users,email",
+				"password"	    =>	"required|confirmed",
 			]);
 
 			if ($validator->fails()) {
-        return back()->withErrors($validator->messages())
-                        ->withInput();
-      } 
+            return back()->withErrors($validator->messages())
+                            ->withInput();
+          }
 
-      $rt = md5(rand(1, 10000) . $request->email . now());
-			
-			$saveUser = User::create([
-				"first_name"	=>	$request->first_name,
-				"last_name"	=>	$request->last_name,
-        "email"			=>	$request->email,
-				"password"		=>	Hash::make($request->password),
-				'type'			=>	'user',
-			]);
-      $saveUser->createAsStripeCustomer();
-      $saveUser->remember_token = $rt;
-      $saveUser->save();
-      app('App\Http\Controllers\mailController')->sendVerifyEmail($request->email, $rt);
-      $msg = ["success" => true, "msg" =>	"Thank you for signing up. Please check your inbox and verify your email to continue."];
-		} catch (Exception $e) {
+          $rt = md5(rand(1, 10000) . $request->email . now());
+
+         $saveUser = User::create([
+                "first_name"	=>	$request->first_name,
+                "last_name"	    =>	$request->last_name,
+                "email"			=>	$request->email,
+                "password"		=>	Hash::make($request->password),
+                'type'			=>	'user',
+            ]);
+
+          $saveUser->remember_token = $rt;
+          $saveUser->save();
+          //app('App\Http\Controllers\mailController')->sendVerifyEmail($request->email, $rt);
+          $msg = ["success" => true, "msg" =>	"Thank you for signing up. Please check your inbox and verify your email to continue."];
+
+        } catch (Exception $e) {
 			Log::info([
 				"Error"	=>	$e->getMessage(),
 				"File"	=>	$e->getFile(),
 				"Line"	=>	$e->getLine()
 			]);
 
-     
-      $msg = ["success" => false, "msg" =>	"Error: ". $e->getMessage()];
-		}
-		
-    
-    return view('message', compact('msg'));
+            $msg = ["success" => false, "msg" =>	"Error: ". $e->getMessage()];
+        }
+
+        return view('message', compact('msg'));
 	}
 
   public function login(Request $request) {
@@ -91,7 +90,7 @@ class UserManagementController extends Controller
 	public function loginHandle(Request $request) {
 		try {
 				$request->session()->flash('form', 'login');
-		
+
 				$validator = Validator::make($request->all(),[
 					"email"		=>	"required|",
 					"password"	=>	"required"
@@ -99,8 +98,8 @@ class UserManagementController extends Controller
 
 				if ($validator->fails()) {
            throw new Exception(implode("<br/>",$validator->messages()->all()));
-				} 
-		
+				}
+
 				$credentials = $request->only('email', 'password');
 
 				if (Auth::attempt($credentials)) {
@@ -174,7 +173,7 @@ class UserManagementController extends Controller
 
           $msg = ["success" => false, "msg"	=>	$e->getMessage()];
         }
-      
+
       return view('message', compact('msg'));
   }
 
@@ -189,8 +188,8 @@ class UserManagementController extends Controller
       }
 
       $new_password =  strtoupper(substr(preg_replace("/[^a-zA-Z0-9]+/", "",
-          base64_encode(random_bytes(16))), 0, 7)); 
-    
+          base64_encode(random_bytes(16))), 0, 7));
+
       DB::table('users')->
         where('email', $request->email)->update([
           "password"		=> Hash::make($new_password),
@@ -209,7 +208,7 @@ class UserManagementController extends Controller
 
           $msg = ["success" => false, "msg"	=>	$e->getMessage()];
         }
- 
+
        return view('message', compact('msg'));
 	}
 
@@ -219,7 +218,7 @@ class UserManagementController extends Controller
 
   public function changePasswordHandle(Request $request) {
     try {
-    
+
       $validator = Validator::make($request->all(),[
         "password"	=>	"required|min:5|confirmed",
 				"oldpassword"	=>	"required",
@@ -227,13 +226,13 @@ class UserManagementController extends Controller
 
 			if ($validator->fails()) {
         throw new Exception(implode(",",$validator->messages()->all()));
-      } 
+      }
 
          #Match The Old Password
         if(!Hash::check($request->oldpassword, auth()->user()->password)){
         throw new Exception("Invalid old password");
         }
-      
+
       $user_id = Auth::id();
       $user = User::find($user_id);
       $user->password = Hash::make($request->password);
@@ -249,7 +248,7 @@ class UserManagementController extends Controller
 
       $msg = ["success" => false, "msg"	=>	$e->getMessage()];
     }
-    
+
     return view('message', compact('msg'));
   }
 

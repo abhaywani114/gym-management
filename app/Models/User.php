@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Models;
+use App\Models\AdDetail;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+//use Laravel\Cashier\Billable;
 
 class User extends Authenticatable
 {
@@ -18,9 +20,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'status',
+        'google_id'
     ];
 
     /**
@@ -42,4 +47,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-}
+    public function getNameAttribute() {
+        return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
+    }
+
+ }

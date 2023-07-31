@@ -1,11 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap');
 @import './navbar.scss';
+@import './form.scss';
+@import './profile.scss';
+@import './timeline.scss';
 * {
   margin: 0;
   padding: 0;
   font-family: 'DM Sans', sans-serif;
 }
 
-html {
-  background: #F5F5F5;
+body {
+  background: $background;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
 }
+
+.hide {display: none;}
+.text-center {text-align: center;}
+.main-content-wrapper {
+    padding: 80px 0px;
+    width: 100%;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    .regular-content {
+        background: #fff;
+        width: 90%;
+        margin: auto;
+        box-shadow: rgba(178, 178, 178, 0.32) 1px -3px 7px 6px;
+        @include md {
+            width: 50%;
+        }
+    }
+}
+
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
