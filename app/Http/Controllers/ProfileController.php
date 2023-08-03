@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserDetails;
+use App\Models\Timeline;
 use Illuminate\Http\Request;
 use Auth;
 

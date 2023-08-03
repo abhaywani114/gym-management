@@ -2,6 +2,8 @@
 
 namespace App\Models;
 use App\Models\UserDetails;
+use App\Models\Timeline;
+
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -63,6 +65,10 @@ class User extends Authenticatable
             'key'      => "dp",
             'user_id'  => $this->attributes['id']
         ])->first()->value ?? '';
+    }
+
+    public function posts() {
+      return $this->hasMany(Timeline::class, 'user_id')->orderBy('created_at', 'desc');
     }
 
  }

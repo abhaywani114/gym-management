@@ -1,11 +1,13 @@
 @extends('profile.index')
 
-@section('title', ucfirst(Auth::user()->type).' Profile > Timeline')
+@section('title', ucfirst($user->type).' Profile - Timeline')
 
 @section('profile_content')
 <div class="timeline-wrapper">
     <div class="timeline-line"></div>
 
+
+    @foreach($user->posts as $post)
     <div class="post">
         <div class="icon">
             <div class="svgicon">
@@ -13,14 +15,17 @@
             </div>
         </div>
         <div class="content">
+            @if(!empty($post->image))
             <div class="image">
-                <img src="https://placehold.co/600x400" />
+                <img src="{{$post->image}}" />
             </div>
+            @endif
             <div class="text">
-                SAML 2.0, OpenID and OAuth 2.0/OpenID Connect are protocols used for web single sign on and identity and access management that have been developed over the past 16 years.
+                {{ $post->text }}
             </div>
         </div>
     </div>
+    @endforeach
 
 </div>
 @endsection

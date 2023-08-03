@@ -4,7 +4,7 @@
 @section('content')
 <div class="webfeed-wrapper">
     <div class="regular-content">
-   <form class="form" autocomplete="off" method="POST" action="{{route('user.login.handle')}}">
+   <form class="form" autocomplete="off" method="POST" enctype="multipart/form-data" action="{{route('timeline.add_handle')}}">
     <h1>New Post</h1>
     @if ($errors->any())
             <div class="alert alert-danger">
@@ -16,25 +16,26 @@
             </div>
         @endif
         <div class="field ">
-            <textarea type="text" placeholder="What is on your mind?" name="email" rows="4" style="height: unset;min-height: 40px;" required></textarea>
+            <textarea type="text" placeholder="What is on your mind?" name="text" rows="4" style="height: unset;min-height: 40px;" required></textarea>
         </div>
         <div class="button-wrapper">
-          <input type="file" id="image_1" style="display: none;" name="image_1" accept="image/*"  onchange="fileSelected(this)" />
+          <input type="file" id="image_1" style="display: none;" name="image" accept="image/*"  onchange="fileSelected(this)" />
           <a class="button" onclick="selectFile('image_1')">
             <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 8.5H8V14.5H6V8.5H0V6.5H6V0.5H8V6.5H14V8.5Z" fill="white"/></svg>
-              Upload Image 1
+              Upload Image
           </a>
         </div>
         <br/>
         <div class="button-wrapper">
             @csrf
-            <button class="button">Add</button>
+            <button class="button">Post</button>
         </div>
     </form>
 </div>
 
 <div class="timeline-wrapper webfeed">
     <div class="timeline-line"></div>
+    @foreach($timeline as $post)
     <div class="post">
         <div class="icon">
             <div class="svgicon">
@@ -46,10 +47,11 @@
                 <img src="https://placehold.co/600x400" />
             </div>
             <div class="text">
-                SAML 2.0, OpenID and OAuth 2.0/OpenID Connect are protocols used for web single sign on and identity and access management that have been developed over the past 16 years.
+                {{$post->text}}
             </div>
         </div>
     </div>
+    @endforeach
 </div>
 </div>
 <script>

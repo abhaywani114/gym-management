@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TimelineController;
+use \App\Models\Timeline;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +18,8 @@ use App\Http\Controllers\ProfileController;
 |
 */
 Route::middleware('auth')->get('/', function () {
-    return view('web_feed');
+    $timeline = Timeline::orderBy('created_at', 'desc')->get();
+    return view('web_feed', compact('timeline'));
 })->name('homepage');
 
 Route::name('profile.')->prefix('/{username}')->middleware(['auth'])->group(function () {
@@ -26,6 +29,10 @@ Route::name('profile.')->prefix('/{username}')->middleware(['auth'])->group(func
     Route::get('/settings', [ProfileController::class, "settings"])->name('settings');
 
     Route::post('/settings', [ProfileController::class, "settingsHandle"])->name('settings.handle');
+});
+
+Route::name('timeline.')->prefix('timeline')->middleware(['auth'])->group(function () {
+    Route::post('/add-post', [TimelineController::class, "newPost"])->name('add_handle');
 });
 //########################################
 //User Management Routes

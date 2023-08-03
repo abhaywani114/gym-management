@@ -69,9 +69,11 @@ $backgroundTL: rgba(129,73,248,0.1);
 
 
         .content {
-            min-height: 400px;
             background: $backgroundTL;
             width: calc(100% - 70px);
+            display: flex;
+            align-items: center;
+            flex-direction: column;
             &.webfeed {
                 background: #ccc;
             }
