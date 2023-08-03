@@ -9,5 +9,5 @@ class UserDetails extends Model
 {
     use HasFactory;
     protected $table = 'user_detail';
-    protected $gaurded = [];
+    protected $guarded = [];
 }

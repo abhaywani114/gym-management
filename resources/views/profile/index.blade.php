@@ -2,13 +2,11 @@
 
 @section('content')
 <div class="profile-wrapper">
-    <div class="profile-picture">
-        <img src="{{asset('assets/svgs/user.svg')}}" alt="User {{$user->name}}" />
-    </div>
+        <img class="profile-picture" src="{{!empty($user->dp) ? $user->dp:asset('assets/svgs/user.svg')}}" alt="User {{$user->name}}" />
     <div class="profile-content">
         <div class="user-info">
             <h1 class="username">{{$user->name}}</h1>
-            <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sagittis efficitur leo, a facilisis ex eleifend a. Praesent lectus quam, pulvinar a lacus ac, consectetur aliquam lorem. Ut molestie varius facilisis. In hac habitasse platea dictumst. Sed quis lectus a tellus luctus luctus.</p>
+            <p class="description">{{$user->bio}}</p>
             <p class="location">Following: <span class="highlight">10</span> | Followers: <span class="highlight">15</span> | Sogam, Kupwara</p>
         </div>
 

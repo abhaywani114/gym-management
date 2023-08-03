@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-use App\Models\AdDetail;
+use App\Models\UserDetails;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -49,6 +49,20 @@ class User extends Authenticatable
     ];
     public function getNameAttribute() {
         return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
+    }
+
+    public function getBioAttribute() {
+        return UserDetails::where([
+            'key'      => "bio",
+            'user_id'  => $this->attributes['id']
+        ])->first()->value ?? '';
+    }
+
+    public function getDpAttribute() {
+        return UserDetails::where([
+            'key'      => "dp",
+            'user_id'  => $this->attributes['id']
+        ])->first()->value ?? '';
     }
 
  }

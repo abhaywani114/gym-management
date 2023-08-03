@@ -24,6 +24,8 @@ Route::name('profile.')->prefix('/{username}')->middleware(['auth'])->group(func
     Route::get('/details', [ProfileController::class, "details"])->name('details');
     Route::get('/calendar', [ProfileController::class, "calendar"])->name('calendar');
     Route::get('/settings', [ProfileController::class, "settings"])->name('settings');
+
+    Route::post('/settings', [ProfileController::class, "settingsHandle"])->name('settings.handle');
 });
 //########################################
 //User Management Routes
