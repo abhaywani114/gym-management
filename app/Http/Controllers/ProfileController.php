@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserDetails;
+use App\Models\Calender;
 use App\Models\Timeline;
 use Illuminate\Http\Request;
 use Auth;
@@ -21,7 +22,8 @@ class ProfileController extends Controller
 
     public function calendar(Request $request, $userId) {
         $user = User::findOrFail($userId);
-        return view('profile.calendar', compact('user'));
+        $data = Calender::where('user_id', $userId)->orderBy('day', 'desc')->get()->groupBy('day');
+        return view('profile.calendar', compact('user', 'data'));
     }
 
     public function settings(Request $request, $userId) {
@@ -93,6 +95,61 @@ class ProfileController extends Controller
 			]);
             $msg = ["success" => false, "msg"	=>	$e->getMessage()];
         }
+        return view('message', compact('msg'));
+    }
+
+    public function calenderNew($userId, Request $request) {
+        try {
+
+            $validator = \Validator::make($request->all(),[
+                "exercise"	=>	"required|min:3",
+                "day"	    =>	"required"
+            ]);
+
+            if ($validator->fails()) {
+                throw new Exception(implode(",",$validator->messages()->all()));
+            }
+
+            Calender::create([
+                "user_id"   => $userId,
+                "day"       => $request->day,
+                "exercise"  => $request->exercise
+            ]);
+
+
+            $msg = ["success" => true, "msg"	=>	"New exercise added"];
+        } catch (\Exception $e) {
+			\Log::info([
+				"Error"	=>	$e->getMessage(),
+				"File"	=>	$e->getFile(),
+				"Line"	=>	$e->getLine()
+			]);
+            $msg = ["success" => false, "msg"	=>	$e->getMessage()];
+        }
+        return view('message', compact('msg'));
+    }
+
+    public function deleteExercise($user_id, $calender_id) {
+        try {
+            $calender = Calender::where([
+                "user_id" => $user_id,
+                "id"    =>  $calender_id
+            ])->first();
+
+            if (!$calender)
+                throw new \Exception("Data not found");
+
+            $calender->delete();
+            $msg = ["success" => true, "msg"	=>	"Exercise removed"];
+        } catch (\Exception $e) {
+			\Log::info([
+				"Error"	=>	$e->getMessage(),
+				"File"	=>	$e->getFile(),
+				"Line"	=>	$e->getLine()
+			]);
+            $msg = ["success" => false, "msg"	=>	$e->getMessage()];
+        }
+
         return view('message', compact('msg'));
     }
 

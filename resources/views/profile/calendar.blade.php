@@ -5,7 +5,7 @@
 @section('profile_content')
 <div class="profile-content-wrapper ">
     <div class="profile-section">
-    <form class="form" autocomplete="off" method="POST" action="{{route('user.login.handle')}}">
+    <form class="form" autocomplete="off" method="POST" action="{{route('profile.exercise.handle.add', $user->id)}}">
     <h1>Add Exercise</h1>
     @if ($errors->any())
             <div class="alert alert-danger">
@@ -19,9 +19,9 @@
         <div class="field radio">
             <div class="radio">
                 <label>Exercise</label>
-                <input type="text" placeholder="Biseps" name="email" required />
+                <input type="text" placeholder="Biseps" name="exercise" required />
                 <label>Day</label>
-                <select id="days">
+                <select id="days" name="day">
                     <option value="monday">Monday</option>
                     <option value="tuesday">Tuesday</option>
                     <option value="wednesday">Wednesday</option>
@@ -40,22 +40,21 @@
     </form>
 
     </div>
+    @foreach($data as $key => $day)
     <div class="profile-section">
-        <h1>Day</h1>
+        <h1>{{ucfirst($key)}}</h1>
         <table>
             <tbody>
+            @foreach($day as $d)
                 <tr>
-                    <td class="field">1</td>
-                    <td class="data">{{$user->name}}</td>
-                    <td class="delete">Delete</td>
+                    <td class="field">{{$loop->index + 1}}</td>
+                    <td class="data">{{$d->exercise}}</td>
+                    <td class="delete"><a href="{{route('profile.exercise.handle.delete', [$user->id, $d->id])}}">Delete</a></td>
                 </tr>
-                <tr>
-                    <td class="field">2</td>
-                    <td class="data">{{$user->email}}</td>
-                    <td class="delete">Delete</td>
-                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>
+    @endforeach
 </div>
 @endsection

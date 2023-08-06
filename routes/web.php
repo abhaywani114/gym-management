@@ -29,6 +29,8 @@ Route::name('profile.')->prefix('/{username}')->middleware(['auth'])->group(func
     Route::get('/settings', [ProfileController::class, "settings"])->name('settings');
 
     Route::post('/settings', [ProfileController::class, "settingsHandle"])->name('settings.handle');
+    Route::post('/exercise-add', [ProfileController::class, "calenderNew"])->name('exercise.handle.add');
+    Route::get('/{calendarId}/exercise-delete', [ProfileController::class, "deleteExercise"])->name('exercise.handle.delete');
 });
 
 Route::name('timeline.')->prefix('timeline')->middleware(['auth'])->group(function () {
