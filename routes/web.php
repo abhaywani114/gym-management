@@ -24,6 +24,7 @@ Route::middleware('auth')->get('/', function () {
 })->name('homepage');
 
 Route::middleware('auth')->get('/search', [SearchController::class, 'search'])->name('search');
+Route::middleware('auth')->get('/toggle-follow/{id}', [SearchController::class, 'toggleFollow'])->name('toggle_follow');
 Route::name('profile.')->prefix('/{username}')->middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, "profile"])->name('profile');
     Route::get('/details', [ProfileController::class, "details"])->name('details');

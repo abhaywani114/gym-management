@@ -11,8 +11,9 @@
         padding: 10px;
         transform: translateY(60px);
         border: 5px solid $primary_color;
-        z-index: 1;
         object-fit: cover;
+        position: relative;
+        z-index: 2;
         img {
             display: block;
             margin: auto;
@@ -25,12 +26,14 @@
 
     .profile-content {
         min-height: 100vh;
-        background: #fff;
         padding-top: 60px;
         margin: auto;
         border-radius: 5px;
         box-shadow: rgba(178, 178, 178, 0.32) 1px -3px 6px 2px;
         width: 95%;
+        backdrop-filter: blur(10px);
+        position: relative;
+        z-index: 1;
         @include md {
             width: 85%;
         }
@@ -49,9 +52,10 @@
             .description {
                 color: rgba(0,0,0, 0.6);
                 font-size: 13px;
-                text-align: justify;
+                text-align: center;
                 line-height: 1;
                 margin-top: 5px;
+                font-weight: 500;
             }
 
             .location {
@@ -63,6 +67,7 @@
                     .highlight {
                         font-weight: 700;
                         color: $primary_color;
+                        cursor: pointer;
                     }
                 }
         }

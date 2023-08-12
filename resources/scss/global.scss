@@ -27,10 +27,10 @@ body {
     display: flex;
     align-items: center;
     .regular-content {
-        background: #fff;
         width: 90%;
         margin: auto;
         box-shadow: rgba(178, 178, 178, 0.32) 1px -3px 7px 6px;
+        backdrop-filter: blur(10px);
         @include md {
             width: 50%;
         }
@@ -45,4 +45,6 @@ body {
   justify-content: center;
   min-height: 400px;
 }
-
+.muted {
+    opacity: 0.6;
+}

@@ -3,6 +3,7 @@
 namespace App\Models;
 use App\Models\UserDetails;
 use App\Models\Timeline;
+use App\Models\Follow;
 
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -70,5 +71,11 @@ class User extends Authenticatable
     public function posts() {
       return $this->hasMany(Timeline::class, 'user_id')->orderBy('created_at', 'desc');
     }
+    public function followers() {
+      return $this->hasMany(Follow::class, 'user_id')->orderBy('created_at', 'desc');
+    }
 
+    public function following() {
+      return $this->hasMany(Follow::class, 'follows')->orderBy('created_at', 'desc');
+    }
  }

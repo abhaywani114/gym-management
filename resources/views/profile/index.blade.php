@@ -7,7 +7,7 @@
         <div class="user-info">
             <h1 class="username">{{$user->name}}</h1>
             <p class="description">{{$user->bio}}</p>
-            <p class="location">Following: <span class="highlight">10</span> | Followers: <span class="highlight">15</span> | Sogam, Kupwara</p>
+            <p class="location">Following: <a class="highlight">{{$user->following->count()}}</a> | Followers: <a class="highlight">{{$user->followers->count()}}</a> | Sogam, Kupwara</p>
         </div>
 
         <div class="user-navbar">

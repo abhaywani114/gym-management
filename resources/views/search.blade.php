@@ -1,30 +1,31 @@
 @extends('layout')
-@section('title', 'Web Feed')
+@section('title', "Search - $search_key")
 
 @section('content')
 <div class="webfeed-wrapper">
 <div class="timeline-wrapper webfeed">
-    <div class="timeline-line"></div>
-    <div class="post">
-        <div class="icon">
-            <div class="svgicon">
-<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15.7 4C18.87 4 21 6.98 21 9.76C21 15.39 12.16 20 12 20C11.84 20 3 15.39 3 9.76C3 6.98 5.13 4 8.3 4C10.12 4 11.31 4.91 12 5.71C12.69 4.91 13.88 4 15.7 4Z" stroke="#06607f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-            </div>
-        </div>
+    @foreach($data as $user)
         <div class="search-result">
             <div class="image">
-                <img src="https://placehold.co/600x400" />
+                <img src="{{!empty($user->dp) ? $user->dp:asset('assets/svgs/user.svg')}}"  />
             </div>
             <div class="text form">
-                <h1 class="username">Abrar Ajaz</h1>
-                <p class="description">On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble.</p>
+                <a class="username" href="{{route('profile.profile', $user->id)}}">{{$user->name}}</a>
+                <p class="description">{{$user->bio}}</p>
+                <p class="description muted" style="font-size: 13px;">Sogam Lolab</p>
                 <div class="buttons button-wrapper">
-                    <button class="button">Follow</button>
-                    <button class="button">Unfollow</button>
-                    <button class="button">Request Admission</button>
+                    @if(!$user->isFollowing)
+                        <a class="button" href="{{route('toggle_follow', $user->id)}}">Follow</a>
+                    @else
+                        <a class="button" href="{{route('toggle_follow', $user->id)}}">Unfollow</a>
+                    @endif
+                    @if ($user->type == 'gym')
+                        <a class="button">Request Admission</a>
+                    @endif
                 </div>
             </div>
         </div>
+    @endforeach
     </div>
 </div>
 </div>
