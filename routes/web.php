@@ -5,6 +5,7 @@ use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TimelineController;
+use App\Http\Controllers\SearchController;
 use \App\Models\Timeline;
 
 /*
@@ -31,7 +32,10 @@ Route::name('profile.')->prefix('/{username}')->middleware(['auth'])->group(func
     Route::post('/settings', [ProfileController::class, "settingsHandle"])->name('settings.handle');
     Route::post('/exercise-add', [ProfileController::class, "calenderNew"])->name('exercise.handle.add');
     Route::get('/{calendarId}/exercise-delete', [ProfileController::class, "deleteExercise"])->name('exercise.handle.delete');
+    Route::get('/{calendarId}/exercise-done', [ProfileController::class, "doneExercise"])->name('exercise.handle.done');
 });
+
+Route::middleware('auth')->get('/exercise-today', [ProfileController::class, "today"])->name('exercise.today');
 
 Route::name('timeline.')->prefix('timeline')->middleware(['auth'])->group(function () {
     Route::post('/add-post', [TimelineController::class, "newPost"])->name('add_handle');

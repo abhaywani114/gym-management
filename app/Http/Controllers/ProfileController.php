@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Models\UserDetails;
 use App\Models\Calender;
 use App\Models\Timeline;
+use App\Models\Track;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -151,6 +152,47 @@ class ProfileController extends Controller
         }
 
         return view('message', compact('msg'));
+    }
+
+    public function today(Request $request) {
+        $day = date('l');
+        $user = $request->user();
+        $exercise = Calender::where('day', date('l'))->get();
+        $exercise->map(function ($e) use ($user) {
+            $e->done = !empty(Track::where([
+                "user_id" => $user->id,
+                "calendar_id" => $e->id
+            ])->first());
+        });
+       return view('profile.today', compact('day', 'user', 'exercise'));
+    }
+
+
+    public function doneExercise($user_id, $calender_id) {
+        try {
+            $calender = Calender::where([
+                "user_id" => $user_id,
+                "id"    =>  $calender_id
+            ])->first();
+
+            if (!$calender)
+                throw new \Exception("Data not found");
+
+            Track::create([
+                "user_id"       => $user_id,
+                "calendar_id"   => $calender_id
+            ]);
+        } catch (\Exception $e) {
+			\Log::info([
+				"Error"	=>	$e->getMessage(),
+				"File"	=>	$e->getFile(),
+				"Line"	=>	$e->getLine()
+			]);
+            $msg = ["success" => false, "msg"	=>	$e->getMessage()];
+            return view('message', compact('msg'));
+        }
+
+        return back();
     }
 
     public function saveFile($fieldName) {
