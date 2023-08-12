@@ -23,6 +23,7 @@ Route::middleware('auth')->get('/', function () {
     return view('web_feed', compact('timeline'));
 })->name('homepage');
 
+Route::middleware('auth')->get('/search', [SearchController::class, 'search'])->name('search');
 Route::name('profile.')->prefix('/{username}')->middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, "profile"])->name('profile');
     Route::get('/details', [ProfileController::class, "details"])->name('details');

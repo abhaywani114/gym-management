@@ -1,0 +1,45 @@
+.search-result {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: #ffffff7a;
+    border-radius: 11px;
+    backdrop-filter: blur(6px);
+    border: 1px solid #fff;
+    width: 100%;
+    .image {
+        flex: 0.4;
+        padding: 10px 7px;
+        img {
+            width: 100%;
+            border-radius: 30%;
+            object-fit: cover;
+        }
+    }
+
+    .text {
+        flex: 0.7;
+        .username {
+            all: unset;
+            font-size: 20px;
+            line-height: 30px;
+            font-weight: 600;
+            color: $primary_color;
+            cursor: pointer;
+        }
+        .description {
+            font-size: 15px;
+            line-height: 1;
+            font-weight: 400;
+            text-align:justify;
+            padding-bottom: 10px;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+            button {
+
+            }
+        }
+    }
+}
