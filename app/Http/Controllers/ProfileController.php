@@ -32,6 +32,23 @@ class ProfileController extends Controller
         return view('profile.settings', compact('user'));
     }
 
+
+    public function following(Request $request, $userId) {
+        $user = User::findOrFail($userId);
+        $title = "Following";
+        $userIds = $user->following->pluck('follows')->toArray();
+        $data = User::whereIn('id', $userIds)->get();
+        return view('profile.follow', compact('user', 'title', 'data'));
+    }
+
+    public function followers(Request $request, $userId) {
+        $user = User::findOrFail($userId);
+        $title = "Followers";
+        $userIds = $user->followers->pluck('user_id')->toArray();
+        $data = User::whereIn('id', $userIds)->get();
+        return view('profile.follow', compact('user', 'title', 'data'));
+    }
+
     public function settingsHandle(Request $request) {
         try {
 

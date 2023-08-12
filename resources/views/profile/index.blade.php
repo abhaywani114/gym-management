@@ -7,7 +7,11 @@
         <div class="user-info">
             <h1 class="username">{{$user->name}}</h1>
             <p class="description">{{$user->bio}}</p>
-            <p class="location">Following: <a class="highlight">{{$user->following->count()}}</a> | Followers: <a class="highlight">{{$user->followers->count()}}</a> | Sogam, Kupwara</p>
+            <p class="location">Following:
+                    <a class="highlight" href="{{route('profile.following', $user->id)}}">{{$user->following->count()}}</a>
+                        | Followers:
+                    <a class="highlight" href="{{route('profile.followers', $user->id)}}">{{$user->followers->count()}}</a>
+                | Sogam, Kupwara</p>
         </div>
 
         <div class="user-navbar">

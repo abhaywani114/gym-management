@@ -30,6 +30,8 @@ Route::name('profile.')->prefix('/{username}')->middleware(['auth'])->group(func
     Route::get('/details', [ProfileController::class, "details"])->name('details');
     Route::get('/calendar', [ProfileController::class, "calendar"])->name('calendar');
     Route::get('/settings', [ProfileController::class, "settings"])->name('settings');
+    Route::get('/following', [ProfileController::class, "following"])->name('following');
+    Route::get('/followers', [ProfileController::class, "followers"])->name('followers');
 
     Route::post('/settings', [ProfileController::class, "settingsHandle"])->name('settings.handle');
     Route::post('/exercise-add', [ProfileController::class, "calenderNew"])->name('exercise.handle.add');

@@ -7,6 +7,13 @@
     backdrop-filter: blur(6px);
     border: 1px solid #fff;
     width: 100%;
+    &.follow {
+        width: 30%;
+        flex-direction: column;
+        align-items: unset;
+        justify-content: center;
+    }
+
     .image {
         flex: 0.4;
         padding: 10px 7px;
@@ -14,11 +21,15 @@
             width: 100%;
             border-radius: 30%;
             object-fit: cover;
+            height: 200px;
+            margin: auto;
+            display: block;
         }
     }
 
     .text {
         flex: 0.7;
+        padding-top: 0px;
         .username {
             all: unset;
             font-size: 20px;

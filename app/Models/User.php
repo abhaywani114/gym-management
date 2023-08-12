@@ -72,10 +72,10 @@ class User extends Authenticatable
       return $this->hasMany(Timeline::class, 'user_id')->orderBy('created_at', 'desc');
     }
     public function followers() {
-      return $this->hasMany(Follow::class, 'user_id')->orderBy('created_at', 'desc');
+      return $this->hasMany(Follow::class, 'follows')->orderBy('created_at', 'desc');
     }
 
     public function following() {
-      return $this->hasMany(Follow::class, 'follows')->orderBy('created_at', 'desc');
+      return $this->hasMany(Follow::class, 'user_id')->orderBy('created_at', 'desc');
     }
  }

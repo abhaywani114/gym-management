@@ -128,10 +128,7 @@
                     border-width: 1px 0 0 1px;
                     tbody {
                          tr{
-                             background: #fff;
-                             &:nth-child(odd) {
-                                background: #f7f8f9;
-                            }
+                             background: #fff0;
                             .field {
                                 width: 180px;
                                 vertical-align: middle;
@@ -141,12 +138,11 @@
                                 color: rgba(0,0,0,0.7);
                             }
                             .data {
-                                border-left: 1px solid #f1f2f3;
                                 min-height: 32px;
                                 padding: 8px 10px;
                                 display: inline-block;
                                 position: relative;
-                                font-weight: 300;
+                                font-weight: 700;
                                 color: rgba(0,0,0,0.8);
                             }
                             .delete {
