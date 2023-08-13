@@ -6,6 +6,7 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ChatController;
 use \App\Models\Timeline;
 
 /*
@@ -37,6 +38,10 @@ Route::name('profile.')->prefix('/{username}')->middleware(['auth'])->group(func
     Route::post('/exercise-add', [ProfileController::class, "calenderNew"])->name('exercise.handle.add');
     Route::get('/{calendarId}/exercise-delete', [ProfileController::class, "deleteExercise"])->name('exercise.handle.delete');
     Route::get('/{calendarId}/exercise-done', [ProfileController::class, "doneExercise"])->name('exercise.handle.done');
+});
+
+Route::name('chat.')->prefix('/chat')->middleware(['auth'])->group(function () {
+    Route::get('/', [ChatController::class, "chat"])->name('chat');
 });
 
 Route::middleware('auth')->get('/exercise-today', [ProfileController::class, "today"])->name('exercise.today');

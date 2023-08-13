@@ -49,7 +49,7 @@
       <li><a class="{{request()->route()->getName() == 'user.login' ? 'active':''}}" href="{{route('user.login')}}">Web Feed</a></li>
       <li><a class="{{request()->route()->getName() == 'profile.profile' ? 'active':''}}" href="{{route('profile.profile', Auth::user()->id)}}">Profile</a></li>
       <li><a class="{{request()->route()->getName() == 'exercise.today' ? 'active':''}}" href="{{route('exercise.today')}}">Today</a></li>
-      <li><a class="{{request()->route()->getName() == 'user.login' ? 'active':''}}" href="{{route('user.login')}}">My Diet</a></li>
+      <li><a class="{{request()->route()->getName() == 'chat.chat' ? 'active':''}}" href="{{route('chat.chat')}}">Chat</a></li>
       <li><a class="{{request()->route()->getName() == 'profile.settings' ? 'active':''}}" href="{{route('profile.settings', Auth::user()->id)}}">Settings</a></li>
     @endauth
     @guest
