@@ -28,7 +28,7 @@
         }
 
         .data {
-            overflow-y: scroll;
+            overflow-y: auto;
             overflow-x: hidden;
             max-height: 90%;
         }
@@ -47,6 +47,20 @@
         }
         .data {
             flex-grow: 1;
+            padding: 10px 10px;
+            overflow-y: auto;
+            .message-unit {
+                padding: 5px 0px;
+                a {
+                    all: unset;
+                    cursor: pointer;
+                    color: $primary_color;
+                    font-size: 17px;
+                }
+                span {
+                    font-size: 12px;
+                }
+            }
         }
     }
 }

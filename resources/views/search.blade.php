@@ -22,6 +22,7 @@
                     @if ($user->type == 'gym')
                         <a class="button">Request Admission</a>
                     @endif
+                        <a class="button" href="{{route('chat.chat', $user->id)}}">Chat</a>
                 </div>
             </div>
         </div>

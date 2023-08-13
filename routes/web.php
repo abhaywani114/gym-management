@@ -41,7 +41,8 @@ Route::name('profile.')->prefix('/{username}')->middleware(['auth'])->group(func
 });
 
 Route::name('chat.')->prefix('/chat')->middleware(['auth'])->group(function () {
-    Route::get('/', [ChatController::class, "chat"])->name('chat');
+    Route::get('/{uid?}', [ChatController::class, "chat"])->name('chat');
+    Route::post('/send', [ChatController::class, "sendMessage"])->name('send');
 });
 
 Route::middleware('auth')->get('/exercise-today', [ProfileController::class, "today"])->name('exercise.today');
