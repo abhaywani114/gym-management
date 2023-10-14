@@ -21,6 +21,9 @@
                 <img src="{{$post->image}}" />
             </div>
             @endif
+            <div class='user-info'>
+                <h4>{{$post->author->first_name}} {{$post->author->last_name}}, <span class="muted">{{$post->created_at->diffForHumans()}}</span></h4>
+            </div>
             <div class="text">
                 {{ $post->text }}
             </div>
