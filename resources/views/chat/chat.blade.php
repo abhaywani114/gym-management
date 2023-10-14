@@ -13,7 +13,6 @@
                     </div>
                     <div class="text">
                         <a class="username" href="{{route('chat.chat', $u->id)}}">{{$u->name}}</a>
-                        <p class="description muted" style="font-size: 13px;">Sogam Lolab</p>
                     </div>
                 </div>
                 @endforeach

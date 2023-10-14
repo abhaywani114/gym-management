@@ -12,7 +12,6 @@
             <div class="text form">
                 <a class="username" href="{{route('profile.profile', $user->id)}}">{{$user->name}}</a>
                 <p class="description">{{$user->bio}}</p>
-                <p class="description muted" style="font-size: 13px;">Sogam Lolab</p>
                 <div class="buttons button-wrapper">
                     @if(!$user->isFollowing)
                         <a class="button" href="{{route('toggle_follow', $user->id)}}">Follow</a>
