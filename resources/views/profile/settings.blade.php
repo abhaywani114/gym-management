@@ -27,6 +27,13 @@
                 <label>Profile Picture</label>
                 <input type="file" min="4" name="dp"  />
               </div>
+              <div class="field">
+                <label>Profile Type</label>
+                <select name="type">
+                  <option value="user">User</option>
+                  <option value="gym">Gym</option>
+                </select>
+              </div>
             <div class="field">
                 <label>Old Password</label>
                 <input type="password" placeholder="Enter your old password" name="oldpassword" min="4" />

@@ -66,6 +66,13 @@ class ProfileController extends Controller
                 ], $bio);
             }
 
+            
+            if(!empty($request->type)) {
+                User::where('id', Auth::user()->id)->update([
+                    'type' => $request->type
+                ]);
+            }
+
             if (!empty($file = $this->saveFile('dp'))) {
 
                 $bio = [
