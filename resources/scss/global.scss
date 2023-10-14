@@ -31,7 +31,7 @@ body {
         width: 90%;
         margin: auto;
         box-shadow: rgba(178, 178, 178, 0.32) 1px -3px 7px 6px;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(2px);
         @include md {
             width: 50%;
         }

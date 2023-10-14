@@ -51,10 +51,11 @@ class UserManagementController extends Controller
                 "last_name"	    =>	$request->last_name,
                 "email"			=>	$request->email,
                 "password"		=>	Hash::make($request->password),
+                'email_verified_at' => now(),
                 'type'			=>	'user',
             ]);
 
-          $saveUser->remember_token = $rt;
+          //$saveUser->remember_token = $rt;
           $saveUser->save();
           //app('App\Http\Controllers\mailController')->sendVerifyEmail($request->email, $rt);
           $msg = ["success" => true, "msg" =>	"Thank you for signing up. Please check your inbox and verify your email to continue."];
@@ -92,7 +93,7 @@ class UserManagementController extends Controller
 				$request->session()->flash('form', 'login');
 
 				$validator = Validator::make($request->all(),[
-					"email"		=>	"required|",
+					"email"		=>	"required",
 					"password"	=>	"required"
 				]);
 

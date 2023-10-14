@@ -51,6 +51,7 @@
       <li><a class="{{request()->route()->getName() == 'exercise.today' ? 'active':''}}" href="{{route('exercise.today')}}">Today</a></li>
       <li><a class="{{request()->route()->getName() == 'chat.chat' ? 'active':''}}" href="{{route('chat.chat')}}">Chat</a></li>
       <li><a class="{{request()->route()->getName() == 'profile.settings' ? 'active':''}}" href="{{route('profile.settings', Auth::user()->id)}}">Settings</a></li>
+      <li><a class="{{request()->route()->getName() == 'user.logout' ? 'active':''}}" href="{{route('user.logout')}}">Logout</a></li>
     @endauth
     @guest
       <li><a class="{{request()->route()->getName() == 'user.login' ? 'active':''}}" href="{{route('user.login')}}">Login</a></li>

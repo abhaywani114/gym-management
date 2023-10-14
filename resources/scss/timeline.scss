@@ -46,11 +46,13 @@ $backgroundTL: rgba(129,73,248,0.1);
                 width: 50px;
                 height: 50px;
                 border-radius: 50%;
-                border: 3px solid $primary_color;
+                background: $primary_color;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-
+                svg {
+                    display: none;
+                }
                 &::after {
                     position: absolute;
                     right: 0;
@@ -79,6 +81,7 @@ $backgroundTL: rgba(129,73,248,0.1);
                 background: #ccc;
             }
             .image {
+                padding-top: 15px;
                 img {
                     width: 100%;
                     height: auto;

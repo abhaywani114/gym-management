@@ -48,7 +48,7 @@ class TimelineController extends Controller
             $extension = $file->getClientOriginalExtension();
 
             // Check if the file type is allowed
-            if(in_array($extension, ['gif', 'jpg', 'jpeg', 'png', 'pdf', 'svg'])) {
+            if(in_array($extension, ['gif', 'jpg', 'jpeg', 'png', 'webp', 'svg'])) {
 
                 // Generate a unique name for the file
                 $fileName = time().'-'.$file->getClientOriginalName();

@@ -43,9 +43,11 @@
             </div>
         </div>
         <div class="content webfeed">
-            <div class="image">
-                <img src="https://placehold.co/600x400" />
+            @if ($post->image)
+            <div class="image" style="padding-top:10px;">
+                <img src="{{$post->image}}" />
             </div>
+            @endif
             <div class="text">
                 {{$post->text}}
             </div>
