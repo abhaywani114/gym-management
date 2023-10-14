@@ -20,7 +20,7 @@ use \App\Models\Timeline;
 |
 */
 Route::middleware('auth')->get('/', function () {
-    $timeline = Timeline::orderBy('created_at', 'desc')->get();
+    $timeline = Timeline::whereIn('user_id', Auth::user()->following()->pluck('id')->toArray())->orderBy('created_at', 'desc')->get();
     return view('web_feed', compact('timeline'));
 })->name('homepage');
 
