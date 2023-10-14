@@ -34,7 +34,9 @@
 </div>
 
 <div class="timeline-wrapper webfeed">
-    <div class="timeline-line"></div>
+    @if (!$timeline->isEmpty())
+        <div class="timeline-line"></div>
+    @endif
     @foreach($timeline as $post)
     <div class="post">
         <div class="icon">

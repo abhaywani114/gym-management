@@ -4,8 +4,9 @@
 
 @section('profile_content')
 <div class="timeline-wrapper">
-    <div class="timeline-line"></div>
-
+    @if (!$user->posts->isEmpty())
+        <div class="timeline-line"></div>
+    @endif
 
     @foreach($user->posts as $post)
     <div class="post">
