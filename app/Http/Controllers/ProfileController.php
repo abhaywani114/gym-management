@@ -6,8 +6,10 @@ use App\Models\UserDetails;
 use App\Models\Calender;
 use App\Models\Timeline;
 use App\Models\Track;
+use App\Models\Admission;
 use Illuminate\Http\Request;
 use Auth;
+use Exception;
 
 class ProfileController extends Controller
 {
@@ -217,6 +219,46 @@ class ProfileController extends Controller
         }
 
         return back();
+    }
+
+    public function askAdmission() {
+        if(Auth::user()->type == 'user')
+            $data = Admission::where('user_id', Auth::user()->id)->get();
+        else
+            $data = Admission::where('gym_id', Auth::user()->id)->get();
+
+        return view('profile.ask-admission', compact('data'));
+    }
+
+    public function handleAskAdmission(Request $request, $gym_id) {
+        try {
+            $validator = \Validator::make($request->all(),[
+                "message"	=>	"required|min:3",
+            ]);
+
+            if ($validator->fails()) {
+                throw new Exception(implode(",",$validator->messages()->all()));
+            }
+            
+            Admission::updateOrCreate([
+                'gym_id'  => $gym_id,
+                'user_id' => Auth::user()->id,
+                'message' => $request->message      
+            ], [
+                'gym_id'  => $gym_id,
+                'user_id' => Auth::user()->id,
+            ]);
+            $msg = ["success" => true, "msg" => "Request for admission sent"];
+        } catch (\Exception $e) {
+            \Log::info([
+                "Error"	=>	$e->getMessage(),
+                "File"	=>	$e->getFile(),
+                "Line"	=>	$e->getLine()
+            ]);
+            $msg = ["success" => false, "msg"	=>	$e->getMessage()];
+        }
+
+        return view('message', compact('msg'));
     }
 
     public function saveFile($fieldName) {

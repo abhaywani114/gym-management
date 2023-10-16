@@ -21,7 +21,7 @@
                 <li><a>Performance</a></li>
                 <li><a href="{{route('profile.calendar', $user->id)}}" class="{{request()->route()->getName() == 'profile.calendar' ? 'active':''}}">Calender</a></li>
                 @elseif($user->type == 'gym' && $user->id != Auth::user()->id && Auth::user()->type != 'gym')
-                <li><a href="{{route('profile.calendar', $user->id)}}" class="{{request()->route()->getName() == 'profile.calendar' ? 'active':''}}">Ask for Admission</a></li>
+                <li><a href="{{route('profile.ask-admission', $user->id)}}" class="{{request()->route()->getName() == 'profile.ask-admission' ? 'active':''}}">Ask for Admission</a></li>
                 @endif
                 @if($user->id != Auth::user()->id)
                    <li><a  href="{{route('chat.chat', $user->id)}}">Message</a></li>

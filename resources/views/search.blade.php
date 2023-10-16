@@ -4,6 +4,9 @@
 @section('content')
 <div class="webfeed-wrapper">
 <div class="timeline-wrapper webfeed">
+    @if($data->isEmpty())
+        <h2>No user found for the key: {{$search_key}}</h2>
+    @endif
     @foreach($data as $user)
         <div class="search-result">
             <div class="image">
