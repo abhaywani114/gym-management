@@ -48,7 +48,11 @@
     @auth
       <li><a class="{{request()->route()->getName() == 'user.login' ? 'active':''}}" href="{{route('user.login')}}">Web Feed</a></li>
       <li><a class="{{request()->route()->getName() == 'profile.profile' ? 'active':''}}" href="{{route('profile.profile', Auth::user()->id)}}">Profile</a></li>
-      <li><a class="{{request()->route()->getName() == 'exercise.today' ? 'active':''}}" href="{{route('exercise.today')}}">Today</a></li>
+      @if(Auth::user()->type == 'gym')
+      <li><a class="{{request()->route()->getName() == 'view-admissions' ? 'active':''}}" href="{{route('view-admissions')}}">Admissions</a></li> 
+      @else
+        <li><a class="{{request()->route()->getName() == 'exercise.today' ? 'active':''}}" href="{{route('exercise.today')}}">Today</a></li>
+      @endif
       <li><a class="{{request()->route()->getName() == 'chat.chat' ? 'active':''}}" href="{{route('chat.chat')}}">Chat</a></li>
       <li><a class="{{request()->route()->getName() == 'profile.settings' ? 'active':''}}" href="{{route('profile.settings', Auth::user()->id)}}">Settings</a></li>
       <li><a class="{{request()->route()->getName() == 'user.logout' ? 'active':''}}" href="{{route('user.logout')}}">Logout</a></li>

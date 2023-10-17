@@ -6,8 +6,8 @@
 <main class="main-content-wrapper">
     <div class="regular-content">
         <div class="d-flex login-wrapper">
-        <form class="form" autocomplete="off" method="POST" enctype="multipart/form-data" action="{{route('profile.ask-admission.handle', Auth::user()->id)}}">
-        <h1>Ask Admission</h1>
+        <form class="form" autocomplete="off" method="POST" enctype="multipart/form-data" action="{{route('profile.ask-admission.handle', $gym->id)}}">
+        <h2>{{$gym->first_name}} {{$gym->last_name}}:<small>Ask Admission</small></h2>
         @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul style="margin:3px;">
@@ -28,12 +28,14 @@
           </div>
         </form>
         @if(!$data->isEmpty())
-        <table>
+        <table class="tbl">
             <tbody>
+                @foreach($data as $d)
                 <tr>
-                    <td class="field"></td>
-                    <td class="data"></td>
+                    <td class="field">{{$d->gym->first_name}} {{$d->gym->last_name}}</td>
+                    <td class="data">{{ucfirst($d->status)}}</td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
         @endif

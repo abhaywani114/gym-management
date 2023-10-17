@@ -91,3 +91,35 @@
   color: rgba(229, 1, 1, 0.8);
   font-weight: 600;
 }
+
+.mybutton {
+  all: unset;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 32px;
+  gap: 10px;
+  background: $primary_color;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  flex-grow: 1;
+  flex-shrink: 0;
+  &.selected {
+    background: $secondary_color;
+  }
+  &:hover {
+    background: $secondary_color;
+  }
+  &.google {
+    font-weight: 700;
+    background: rgba(0,0,0,0.5);
+    &:hover {
+      background: rgba(0,0,0,0.8);
+    }
+  }
+}

@@ -221,13 +221,13 @@ class ProfileController extends Controller
         return back();
     }
 
-    public function askAdmission() {
-        if(Auth::user()->type == 'user')
-            $data = Admission::where('user_id', Auth::user()->id)->get();
-        else
-            $data = Admission::where('gym_id', Auth::user()->id)->get();
-
-        return view('profile.ask-admission', compact('data'));
+    public function askAdmission($id) {
+        $data = Admission::where([ 
+        'user_id' => Auth::user()->id,
+        'gym_id' => $id
+        ])->get();
+        $gym = User::findOrFail($id);
+        return view('profile.ask-admission', compact('data', 'gym'));
     }
 
     public function handleAskAdmission(Request $request, $gym_id) {

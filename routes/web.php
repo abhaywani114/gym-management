@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\AdmissionController;
 use \App\Models\Timeline;
 
 /*
@@ -33,6 +34,7 @@ Route::name('profile.')->prefix('/{username}')->middleware(['auth'])->group(func
     Route::get('/settings', [ProfileController::class, "settings"])->name('settings');
     Route::get('/following', [ProfileController::class, "following"])->name('following');
     Route::get('/followers', [ProfileController::class, "followers"])->name('followers');
+
     Route::get('/ask-admission', [ProfileController::class, "askAdmission"])->name('ask-admission');
     Route::post('/ask-admission-handle', [ProfileController::class, "handleAskAdmission"])->name('ask-admission.handle');
 
@@ -41,6 +43,9 @@ Route::name('profile.')->prefix('/{username}')->middleware(['auth'])->group(func
     Route::get('/{calendarId}/exercise-delete', [ProfileController::class, "deleteExercise"])->name('exercise.handle.delete');
     Route::get('/{calendarId}/exercise-done', [ProfileController::class, "doneExercise"])->name('exercise.handle.done');
 });
+
+Route::middleware('auth')->get('/view-admission',[AdmissionController::class, 'viewAdmission'])->name('view-admissions');
+Route::middleware('auth')->get('/action-admission/{id}/{verb}',[AdmissionController::class, 'actionAdmission'])->name('action-admissions');
 
 Route::name('chat.')->prefix('/chat')->middleware(['auth'])->group(function () {
     Route::get('/{uid?}', [ChatController::class, "chat"])->name('chat');

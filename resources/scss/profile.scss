@@ -118,7 +118,7 @@
                     font-weight: 400;
                     color: $primary_color;
                 }
-                table {
+                table, .tbl {
                     width: 100%;
                     margin: 0;
                     padding: 0;
@@ -153,5 +153,39 @@
                 }
             }
         } /*/ profile-content-wrapper END /*/
+    }
+}
+
+.tbl {
+    width: 100%;
+    margin: 0;
+    padding: 25px;
+    display: table;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-width: 1px 0 0 1px;
+    tbody {
+         tr{
+             background: #fff0;
+            .field {
+                width: 180px;
+                vertical-align: middle;
+                min-height: 32px;
+                padding: 8px 10px;
+                font-weight: 700;
+                color: rgba(0,0,0,0.7);
+            }
+            .data {
+                vertical-align: middle;
+                padding: 8px 10px;
+                display: inline-block;
+                position: relative;
+                font-weight: 700;
+                color: rgba(0,0,0,0.8);
+            }
+            .delete {
+                width: 330px;
+            }
+        }
     }
 }

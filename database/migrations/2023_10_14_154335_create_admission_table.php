@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('gym_id');
             $table->string('user_id');
             $table->longtext('message');
-            $table->enum('status',['pending', 'enrolled', 'canceled'])->default('pending');
+            $table->enum('status',['pending', 'enrolled', 'cancelled'])->default('pending');
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Models;
 use App\Models\UserDetails;
 use App\Models\Timeline;
 use App\Models\Follow;
+use App\Models\Admission;
 
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -78,5 +79,8 @@ class User extends Authenticatable
 
     public function following() {
       return $this->hasMany(Follow::class, 'user_id')->orderBy('created_at', 'desc');
+    }
+    public function enrolled() {
+        return $this->hasMany(Admission::class, 'user_id')->orderBy('created_at', 'desc');
     }
  }
