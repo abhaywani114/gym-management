@@ -77,6 +77,12 @@ async function fetchNutritionalData() {
   const maxCarbohidrates = document.getElementById('max_carbohidrates').value;
   const minFat = document.getElementById('min_fat').value;
   const maxFat = document.getElementById('max_fat').value;
+const loading = document.createElement('tr');
+    loading.innerHTML = `
+        <td colspan='4'>Loading data</td>
+    `;
+    document.getElementById('result-tbody').innerHTML = '';
+    document.getElementById('result-tbody').appendChild(loading);
 
   // Initialize an empty query string
   let queryString = '';
@@ -138,6 +144,13 @@ async function fetchNutritionalData() {
       `;
       tableBody.appendChild(row);
     });
+    if (result.length < 1) {
+        const row = document.createElement('tr');
+      row.innerHTML = `
+        <td colspan='4'>No result found</td>
+      `;
+      tableBody.appendChild(row);
+    }
   } catch (error) {
     console.error(error);
   }
