@@ -150,6 +150,9 @@
     }
     .link-list {
       width: 100%;
+      @include md {
+        width: inherit;
+      }
       background-color: #fff;
       padding-left: 40px;
       padding-top: 15px;
