@@ -34,7 +34,7 @@
   </div>
 </nav>
 
-<nav class="nav2">
+<nav class="nav2 sidebar hide">
   <div class="title">
     @guest
         <span>Howdy doing?</span>
