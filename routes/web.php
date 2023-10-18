@@ -45,6 +45,10 @@ Route::name('profile.')->prefix('/{username}')->middleware(['auth'])->group(func
     Route::get('/{calendarId}/exercise-done', [ProfileController::class, "doneExercise"])->name('exercise.handle.done');
 });
 
+Route::middleware('auth')->get('/diet', function() {
+  return view('diet.diet');
+})->name('diet');
+
 Route::middleware('auth')->get('/view-admission',[AdmissionController::class, 'viewAdmission'])->name('view-admissions');
 Route::middleware('auth')->get('/action-admission/{id}/{verb}',[AdmissionController::class, 'actionAdmission'])->name('action-admissions');
 

@@ -53,6 +53,7 @@
       @else
         <li><a class="{{request()->route()->getName() == 'exercise.today' ? 'active':''}}" href="{{route('exercise.today')}}">Today</a></li>
       @endif
+      <li><a class="{{request()->route()->getName() == 'diet' ? 'active':''}}" href="{{route('diet')}}">Diet</a></li>
       <li><a class="{{request()->route()->getName() == 'chat.chat' ? 'active':''}}" href="{{route('chat.chat')}}">Chat</a></li>
       <li><a class="{{request()->route()->getName() == 'profile.settings' ? 'active':''}}" href="{{route('profile.settings', Auth::user()->id)}}">Settings</a></li>
       <li><a class="{{request()->route()->getName() == 'user.logout' ? 'active':''}}" href="{{route('user.logout')}}">Logout</a></li>
