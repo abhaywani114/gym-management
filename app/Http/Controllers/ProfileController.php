@@ -10,6 +10,7 @@ use App\Models\Admission;
 use Illuminate\Http\Request;
 use Auth;
 use Exception;
+use DB;
 
 class ProfileController extends Controller
 {
@@ -28,6 +29,16 @@ class ProfileController extends Controller
         $data = Calender::where('user_id', $userId)->orderBy('day', 'desc')->get()->groupBy('day');
         return view('profile.calendar', compact('user', 'data'));
     }
+
+    public function track(Request $request, $userId) {
+        $user = User::findOrFail($userId);
+        $exerciseData = Calender::where('user_id', $user->id)->select('id','exercise')->get();
+        $exerciseData->map(function($d) {
+            $d->count = DB::table('track')->where('calendar_id', $d->id)->get()->count();
+        });
+        return view('profile.track', compact('user', 'exerciseData'));
+    }
+
 
     public function settings(Request $request, $userId) {
         $user = Auth::user();
