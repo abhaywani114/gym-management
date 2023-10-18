@@ -20,7 +20,7 @@
 
             <div class="field">
                 <label>Bio</label>
-                <textarea rows="4" placeholder="Write something about you" min="5" name="bio"></textarea>
+                <textarea rows="4" placeholder="Write something about you" min="5" name="bio">{{Auth::user()->bio}}</textarea>
               </div>
 
             <div class="field">
@@ -33,6 +33,10 @@
                   <option value="user">User</option>
                   <option value="gym">Gym</option>
                 </select>
+              </div>
+              <div class="field">
+                <label>Google Map Location</label>
+                <input type="text" placeholder="Enter google embeded src" name="map" min="4" value="{{Auth::user()->map}}" />
               </div>
             <div class="field">
                 <label>Old Password</label>

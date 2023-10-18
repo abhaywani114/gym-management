@@ -70,6 +70,14 @@ class User extends Authenticatable
         ])->first()->value ?? '';
     }
 
+    public function getMapAttribute() {
+        return UserDetails::where([
+            'key'      => "map",
+            'user_id'  => $this->attributes['id']
+        ])->first()->value ?? '';
+    }
+
+
     public function posts() {
       return $this->hasMany(Timeline::class, 'user_id')->orderBy('created_at', 'desc');
     }

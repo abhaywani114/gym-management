@@ -17,8 +17,10 @@
             <ul>
                 <li><a href="{{route('profile.profile', $user->id)}}" class="{{request()->route()->getName() == 'profile.profile' ? 'active':''}}">Timeline</a></li>
                 <li><a href="{{route('profile.details', $user->id)}}" class="{{request()->route()->getName() == 'profile.details' ? 'active':''}}">Details</a></li>
+                @if($user->type == 'gym')
+                    <li><a href="{{route('profile.location', $user->id)}}" class="{{request()->route()->getName() == 'profile.location' ? 'active':''}}">Location</a></li>
+                @endif
                 @if($user->type == 'user')
-                <li><a>Performance</a></li>
                 @if ($user->id == Auth::user()->id || array_search(Auth::user()->id, $user->enrolled->pluck('gym_id')->toArray()) !== false)
                     <li><a href="{{route('profile.calendar', $user->id)}}" class="{{request()->route()->getName() == 'profile.calendar' ? 'active':''}}">Calender</a></li>
                 @endif

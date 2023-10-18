@@ -35,6 +35,11 @@ class ProfileController extends Controller
     }
 
 
+    public function location(Request $request, $userId) {
+        $user = User::findOrFail($userId);
+        return view('profile.location', compact('user'));
+    }
+
     public function following(Request $request, $userId) {
         $user = User::findOrFail($userId);
         $title = "Following";
@@ -68,6 +73,21 @@ class ProfileController extends Controller
                 ], $bio);
             }
 
+
+            if(!empty($request->map)) {
+                $bio = [
+                    "key"       => "map",
+                    "value"     => $request->map,
+                    "order"     => "-1",
+                    "user_id"   => Auth::user()->id
+                ];
+
+                UserDetails::updateOrCreate([
+                    "key"       => "map",
+                    "user_id"   => Auth::user()->id
+                ], $bio);
+            }
+
             
             if(!empty($request->type)) {
                 User::where('id', Auth::user()->id)->update([
@@ -90,6 +110,8 @@ class ProfileController extends Controller
                 ], $bio);
 
             }
+
+            
 
             if (!empty($request->password)) {
                 $validator = Validator::make($request->all(),[

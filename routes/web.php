@@ -34,6 +34,7 @@ Route::name('profile.')->prefix('/{username}')->middleware(['auth'])->group(func
     Route::get('/settings', [ProfileController::class, "settings"])->name('settings');
     Route::get('/following', [ProfileController::class, "following"])->name('following');
     Route::get('/followers', [ProfileController::class, "followers"])->name('followers');
+    Route::get('/location', [ProfileController::class, "location"])->name('location');
 
     Route::get('/ask-admission', [ProfileController::class, "askAdmission"])->name('ask-admission');
     Route::post('/ask-admission-handle', [ProfileController::class, "handleAskAdmission"])->name('ask-admission.handle');
